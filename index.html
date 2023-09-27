@@ -26,11 +26,24 @@
 
   <script>
     const modelViewer = document.getElementById('arModel');
+    let arActive = false; // Flag to determine if AR mode is active
+    let clickCount = 0;   // Track number of clicks on the reticle in AR mode
+
+    modelViewer.addEventListener('ar-status', (event) => {
+      // Check if AR mode is active
+      arActive = event.detail.status === 'session-started';
+    });
 
     modelViewer.addEventListener('click', function () {
-      // current model is reticle, on click it's replaced by 3D model
-      if (modelViewer.getAttribute('src') === 'assets/reticle.glb') {
-        modelViewer.setAttribute('src', 'assets/assemblyfb.glb');
+      // If AR mode is active and the current model is the reticle
+      if (arActive && modelViewer.getAttribute('src') === 'assets/reticle.glb') {
+        clickCount++;
+
+        // If reticle has been clicked twice
+        if (clickCount === 2) {
+          modelViewer.setAttribute('src', 'assets/assemblyfb.glb');
+          clickCount = 0;  // Reset click count
+        }
       }
     });
   </script>
