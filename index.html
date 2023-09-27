@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>surface detection</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.2.1/dist/model-viewer.min.js">
+  </script>
+  <style>
+    model-viewer {
+      width: 400px;
+      height: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="card">
+    <model-viewer id="arModel" src="assets/reticle.glb" shadow-intensity="1" camera-controls auto-rotate ar magic-leap>
+    </model-viewer>
+    <section class="attribution">
+    </section>
+  </div>
+
+  <script>
+    const modelViewer = document.getElementById('arModel');
+
+    modelViewer.addEventListener('click', function () {
+      // current model is reticle, on click it's replaced by 3D model
+      if (modelViewer.getAttribute('src') === 'assets/reticle.glb') {
+        modelViewer.setAttribute('src', 'assets/assemblyfb.glb');
+      }
+    });
+  </script>
+</body>
+
+</html>
