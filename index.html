@@ -13,12 +13,17 @@
       height: 600px;
       margin: 0 auto;
     }
+    model-viewer::shadow .slot.poster {
+        display: block !important;
+    }
+
   </style>
 </head>
 
 <body>
   <div id="card">
-    <model-viewer id="arModel" src="assets/reticle.glb" shadow-intensity="1" camera-controls ar 
+    <model-viewer id="arModel" src="assets/reticle.glb" shadow-intensity="1" camera-controls ar interaction-prompt-style="basic"
+
       poster="assets/poster-img.png" ios-src="assets/reticle.usdc">
     </model-viewer>
     <section class="attribution">
@@ -47,6 +52,28 @@
           clickCount = 0;  // Reset click count
         }
       }
+    });
+
+    function showPoster() {
+        const modelViewer = document.getElementById('arModel');
+        
+        // Access the shadow root of the <model-viewer>
+        const shadowRoot = modelViewer.shadowRoot;
+
+        if (shadowRoot) {
+            // Find the element with class 'slot poster' inside the shadow root
+            const posterDiv = shadowRoot.querySelector('.slot.poster');
+            
+            if (posterDiv) {
+                // Set its display to block
+                posterDiv.style.display = 'block';
+            }
+        }
+    }
+
+    // Execute the function after the DOM is fully loaded
+    window.addEventListener('DOMContentLoaded', (event) => {
+        showPoster();
     });
   </script>
 </body>
