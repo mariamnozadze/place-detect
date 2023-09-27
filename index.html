@@ -18,7 +18,8 @@
 
 <body>
   <div id="card">
-    <model-viewer id="arModel" src="assets/reticle.glb" shadow-intensity="1" camera-controls auto-rotate ar magic-leap>
+    <model-viewer id="arModel" src="assets/reticle.glb" shadow-intensity="1" camera-controls ar 
+      poster="assets/poster-img.png" ios-src="assets/reticle.usdc">
     </model-viewer>
     <section class="attribution">
     </section>
@@ -26,8 +27,8 @@
 
   <script>
     const modelViewer = document.getElementById('arModel');
-    let arActive = false; // Flag to determine if AR mode is active
-    let clickCount = 0;   // Track number of clicks on the reticle in AR mode
+    let arActive = false; //  if AR mode is active
+    let clickCount = 0;   // Track number of clicks 
 
     modelViewer.addEventListener('ar-status', (event) => {
       // Check if AR mode is active
@@ -42,6 +43,7 @@
         // If reticle has been clicked twice
         if (clickCount === 2) {
           modelViewer.setAttribute('src', 'assets/assemblyfb.glb');
+          modelViewer.setAttribute('ios-src', 'assets/assemblyfb.usdc');
           clickCount = 0;  // Reset click count
         }
       }
